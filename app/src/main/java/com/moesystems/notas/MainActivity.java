@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.moesystems.notas.DB.DBHelper;
 import com.moesystems.notas.Fragments.AddFragment;
@@ -85,19 +86,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-
+        TextView x = findViewById(R.id.welcomme);
         android.support.v4.app.Fragment miFragment = null;
         boolean fragmentSeleccionado=false;
         int id = item.getItemId();
 
 
         if (id == R.id.nav_add) {
+
+            x.setText("");
             miFragment=new AddFragment();
             fragmentSeleccionado=true;
         } else if (id == R.id.nav_notas) {
+            x.setText("");
             miFragment=new ShowFragment();
             fragmentSeleccionado=true;
         } else if (id == R.id.nav_mod) {
+            x.setText("");
             miFragment=new ControlFragment();
             fragmentSeleccionado=true;
         }

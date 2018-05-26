@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-
+        android:id="@+id/welcomme"
         android:text="Bienvenido al\n Sistema de Notas de última generación"
         />
 

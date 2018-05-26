@@ -1,7 +1,5 @@
 package com.moesystems.notas.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,8 +19,7 @@ import java.util.ArrayList;
 public class ShowFragment extends Fragment {
 
     RecyclerView rv;
-    LinearLayoutManager llm;
-    ArrayList<Student> alumno;
+    ArrayList<Student> students;
     Adapter adapter;
     public ShowFragment() {
         // Required empty public constructor
@@ -35,9 +32,9 @@ public class ShowFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_show, container, false);
 
         rv = view.findViewById(R.id.rv);
-        alumno = DBHelper.myDB.getStudent();
+        students = DBHelper.myDB.getStudent();
 
-        adapter = new Adapter(alumno,getContext());
+        adapter = new Adapter(students,getContext());
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(adapter);
 
