@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.moesystems.notas.Data.Student;
 
+import java.util.ArrayList;
+
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -57,6 +59,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(TABLA_ESTUDIANTE,null,values);
         Toast.makeText(context,"Insertado con exito",Toast.LENGTH_SHORT).show();
         return true;
+    }
+    public ArrayList<Student> getStudent(){
+
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLA_ESTUDIANTE,null);
+        ArrayList<Student> a = new ArrayList<Student>();
+
+        while (cursor.moveToNext()){
+            a.add(new Student(cursor.getString(0),cursor.getString(1),
+                    cursor.getString(2)));
+        }
+
+        return a;
     }
 
     public Student findStudent(String carnet){
