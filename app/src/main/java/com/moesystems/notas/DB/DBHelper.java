@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.moesystems.notas.Data.Student;
@@ -17,7 +18,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CAMPO_ID="carnet";
     public static final String CAMPO_NOMBRE="name";
     public static final String CAMPO_NOTA="nota";
-    public static final String CREAR_TABLA_ESTUDIANTE="CREATE TABLE "+TABLA_ESTUDIANTE +"("+CAMPO_ID+" TEXT,"+CAMPO_NOMBRE+" TEXT,"+CAMPO_NOTA+" TEXT)";
+    public static final String CREAR_TABLA_ESTUDIANTE="CREATE TABLE "+TABLA_ESTUDIANTE +
+            "("+CAMPO_ID+" TEXT,"
+            +CAMPO_NOMBRE+" TEXT,"
+            +CAMPO_NOTA+" TEXT)";
 
     public static DBHelper myDB = null;
     private Context context;
@@ -49,25 +53,28 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(CAMPO_ID,s.getCarne());
         values.put(CAMPO_NOMBRE,s.getName());
+        values.put(CAMPO_NOTA,s.getNota());
         db.insert(TABLA_ESTUDIANTE,null,values);
         Toast.makeText(context,"Insertado con exito",Toast.LENGTH_SHORT).show();
         return true;
     }
 
-    public Student findStudent(String carne){
-        Student s;
-        String[] parametros = {carne};
-        String[] campos = {CAMPO_NOMBRE,CAMPO_NOTA};
-
+    public Student findStudent(String carnet){
+        Student p;
+        String [] parametros = {carnet};
+        String [] campos = {CAMPO_NOMBRE,CAMPO_NOTA};
         try {
-            Cursor cursor = db.query(TABLA_ESTUDIANTE,campos,CAMPO_ID+"=?"+CAMPO_NOTA+"=?",parametros,null,null,null);
+            Cursor cursor = db.query(TABLA_ESTUDIANTE,campos,
+                    CAMPO_ID+"=?",parametros,null,null,null);
             cursor.moveToFirst();
-            s=new Student(carne,cursor.getString(0),cursor.getString(1));
-        }catch (Exception e){
-            s=null;
-
+            p=new Student(carnet,cursor.getString(0),
+                    cursor.getString(1));
         }
-        return s;
+        catch (Exception e){
+            Toast.makeText(context,"Usuario no encontrado", Toast.LENGTH_SHORT).show();
+            p=null;
+        }
+        return p;
     }
     public boolean editStudent(Student s){
         String [] parametros = {s.getCarne()};

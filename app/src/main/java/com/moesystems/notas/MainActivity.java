@@ -14,15 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.moesystems.notas.DB.DBHelper;
 import com.moesystems.notas.Fragments.AddFragment;
 import com.moesystems.notas.Fragments.ControlFragment;
 import com.moesystems.notas.Fragments.ShowFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        AddFragment.OnFragmentInteractionListener,
-        ShowFragment.OnFragmentInteractionListener,
-        ControlFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        DBHelper.getInstance(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +46,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        DBHelper.getInstance(this);
     }
 
     @Override
@@ -90,11 +89,11 @@ public class MainActivity extends AppCompatActivity
         android.support.v4.app.Fragment miFragment = null;
         boolean fragmentSeleccionado=false;
         int id = item.getItemId();
-            miFragment=new AddFragment();
-            fragmentSeleccionado=true;
+
 
         if (id == R.id.nav_add) {
-            // Handle the camera action
+            miFragment=new AddFragment();
+            fragmentSeleccionado=true;
         } else if (id == R.id.nav_notas) {
             miFragment=new ShowFragment();
             fragmentSeleccionado=true;
@@ -110,6 +109,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void onFragmentInteraction(Uri uri){
+    public void onFragmentInteraction(Uri uri) {
     }
 }
