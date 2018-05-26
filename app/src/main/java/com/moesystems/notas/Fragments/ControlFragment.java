@@ -65,5 +65,32 @@ public class ControlFragment extends Fragment {
                 }
             }
         });
+        mod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Student s = DBHelper.myDB.findStudent(carnet.getText().toString());
+                s.setNota(nota.getText().toString());
+                DBHelper.myDB.editStudent(s);
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper.myDB.deleteStudent(carnet.getText().toString());
+                limpiar();
+            }
+        });
+        clean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpiar();
+            }
+        });
     }
+    private void limpiar() {
+        carnet.setText("");
+        nombre.setText("");
+        nota.setText("");
+    }
+
 }

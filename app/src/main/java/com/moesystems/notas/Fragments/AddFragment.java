@@ -25,9 +25,6 @@ public class AddFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,21 +37,18 @@ public class AddFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String carnet = carne.getText().toString();
-                String nombres = nombre.getText().toString();
-                String nota = "";
-                boolean flag = DBHelper.myDB.addStudent(new Student(
-                        carnet,
-                        nombres,nota
-                ));
-                if (flag){
-                    Log.d("mensaje",nombre.getText().toString());
-                }
+                DBHelper.myDB.addStudent(new Student(nombre.getText().toString(),carne.getText().toString(),"" ));
+                limpiar();
+
             }
         });
 
         // Inflate the layout for this fragment
         return view;
+    }
+    private void limpiar() {
+        carne.setText("");
+        nombre.setText("");
     }
 
 

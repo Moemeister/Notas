@@ -53,6 +53,7 @@
             android:id="@+id/txt_carne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="000000"/>
 
     </LinearLayout>

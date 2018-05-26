@@ -67,7 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
             Cursor cursor = db.query(TABLA_ESTUDIANTE,campos,
                     CAMPO_ID+"=?",parametros,null,null,null);
             cursor.moveToFirst();
-            p=new Student(carnet,cursor.getString(0),
+            p=new Student(cursor.getString(0),carnet,
                     cursor.getString(1));
         }
         catch (Exception e){
