@@ -66,7 +66,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<Student> a = new ArrayList<Student>();
 
         while (cursor.moveToNext()){
-            a.add(new Student(cursor.getString(0),cursor.getString(1),
+            a.add(new Student(cursor.getString(1),cursor.getString(0),
                     cursor.getString(2)));
         }
 
